@@ -1,0 +1,179 @@
+git push/pull current branch
+=======================
+git push origin sandbox
+Or
+$ git clone myrepo.git
+$ git checkout -b newb
+$ ...
+$ git commit -m "Some change"
+$ git push origin newb:remote_branch_name
+
+
+
+push a local branch to a different remote branch
+================================================
+It took me a bit longer to figure this out than I thought it should, so I’m documenting it. If you need to push a local branch to a remote different branch, do this:
+
+$ git push remote local_branch:remote_branch
+
+
+A real world example: when pushing to our heroku based staging environment, I need to push my local staging branch to the remote master (since heroku will only deploy the master branch), I do this:
+
+format:
+
+Your colleagues would then just pull that branch, and it's automatically created locally.
+
+Note however that formally, the format is:
+git push <remote-name> <local-branch-name>:<remote-branch-name>
+
+ $ git push heroku_staging staging:master
+
+
+push only a remote branch
+=========================
+
+By default git push updates all the remote branches. But you can configure git to update only the current branch.
+
+git config push.default current ---did not working
+
+ It means git will update only the current (checked out) branch when you do git push.
+
+Other valid options are:
+ •nothing : Do not push anything 
+•matching : Push all matching branches (default) 
+•upstream: Push the current branch to its upstream branch. (the branch git pull would pull from)
+ •tracking : Deprecated, use upstream instead.
+ •current : Push the current branch to the remote branch of the same name.
+ 
+Hope it helps someone..
+example:
+
+
+
+
+git checkout feature_x
+git push origin feature_x
+Or
+git push <remote-name> <branch-name>
+
+
+===============================
+
+How to Push a New Local Branch to a Remote Git Repository 
+
+Here is the command you would execute to push all of the changes from your plugin branch to a plugin branch on the GitHub repository:
+ 
+git push origin plugin
+
+This tells git to push changes from your plugin branch to the plugin branch on the origin repository. If origin does not have a plugin branch, it is created on the fly.
+
+Now, say your friend Bob wants to access the hot new feature you just pushed to the new branch on the GitHub repository. All Bob needs to do is update his local repository with all of the changes on the GitHub repository and create a local branch where he can play with the new code. 
+
+git fetch origin
+git checkout --track origin/plugin
+
+The first command updates Bob's repository with the changes from the remote repository. The second command creates a local branch named plugin that matches the origin/plugin branch and tells git that Bob wants to be able to easily push and pull from the branch on GitHub. Bob can now play with the code, commit his own changes and git push them back up to the GitHub repository
+
+
+use 
+
+git checkout -b NewFeature 
+Or
+git branch NewFeature
+git checkout NewFeature
+
+to create a NewFeature branch
+
+======================================
+
+Add origin name and pull from master
+
+git remote add upstream git://github.com/somename/original-project.git
+
+then you would use this to pull changes:
+
+git pull upstream master
+
+But, if you choose origin for the name of the remote repo, your commands would be:
+
+To name the remote repo in your local config: git remote add origin git://github.com/somename/original-project.git
+
+And to pull: git pull origin master
+
+==========================================
+
+pull from different branch name
+
+git pull is really just a shorthand for 
+
+git pull <remote> <branchname>
+
+In most cases it's equivalent to 
+
+git pull origin master. 
+
+==============================================================================================================================================================================================================
+==============================================================================================================================================================================================================
+
+to check git bash configuration
+git config -l
+
+
+Fetch and Merge
+==============================================================================================================================================================================================================
+
+git checkout master
+# Check out your master branch
+
+git remote add cameronmcefee git://github.com/cameronmcefee/Spoon-Knife.git
+# Add a new remote named 'cameronmcefee'
+
+git fetch cameronmcefee
+# Pull in all the commits from the 'cameronmcefee' remote
+
+git merge cameronmcefee/my-branch
+# Merge your master branch into the 'my-branch' branch from the 'cameronmcefee' remote
+
+git push origin master
+# Push your newly-merged branch back to GitHub
+
+
+More on Git Hub
+==============================================================================================================================================================================================================
+vs 2010 add/commit/
+======================
+http://www.youtube.com/watch?v=HJKeb6b6ZKE&feature=watch_response_rev
+
+conflict on same file
+http://www.youtube.com/watch?v=o9ikluTtgT8
+
+merging idea with conflict with tortoise
+http://www.youtube.com/watch?v=Kmc39RvuGM8
+
+branching
+=========
+GIT: Creating Branches and Switching Between Them (Part 5)
+http://www.youtube.com/watch?v=nUZhryWfJ5g&feature=related
+
+Managing Branches with Git
+http://www.youtube.com/watch?v=xSGxV1pc21M&feature=related
+
+How to use Git - Git Video Tutorial - Part 6 (branch, checkout, remote)
+http://www.youtube.com/watch?v=MQ9Yv8csyMU
+
+merging conflict - using of fetch/rebase /pull
+Michael's Git Tutorial Ep4
+http://www.youtube.com/watch?v=Ss7oAh0Vi_8&feature=relmfu
+
+==============================================================================
+
+
+
+=================================================================
+cheatsheet github
+http://ionrails.com/2009/08/07/git-commands-adding-and-committing-cheatsheet/
+
+short cut online book 
+http://www.vogella.com/articles/Git/article.html
+
+
